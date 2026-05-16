@@ -1,0 +1,16 @@
+{
+  "type": "user_preferences",
+  "last_updated": "2026-05-17T00:00:00+08:00",
+  "items": {
+    "communication_style": {
+      "value": "Concise and direct",
+      "source": "setup",
+      "date_added": "2026-05"
+    },
+    "language": {
+      "value": "English",
+      "source": "setup",
+      "date_added": "2026-05"
+    }
+  }
+}

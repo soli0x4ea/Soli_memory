@@ -1,0 +1,64 @@
+{
+  "version": "1.0",
+  "description": "Soli Memory — file-system based memory for AI agents",
+  "memory_types": {
+    "facts": {
+      "description": "Factual memory: long-term, stable knowledge",
+      "directory": "facts/",
+      "file_pattern": "{category}.json",
+      "schema": {
+        "type": "string",
+        "last_updated": "ISO datetime",
+        "items": {
+          "{key}": {
+            "value": "any",
+            "source": "string",
+            "date_added": "YYYY-MM"
+          }
+        }
+      }
+    },
+    "episodes": {
+      "description": "Episodic memory: time-based event records",
+      "directory": "episodes/",
+      "file_pattern": "YYYY-MM-DD.json",
+      "schema": {
+        "date": "YYYY-MM-DD",
+        "events": [
+          {
+            "time": "HH:MM or string",
+            "type": "event_type",
+            "description": "string"
+          }
+        ],
+        "tasks_completed": ["string"],
+        "decisions_made": ["string"]
+      }
+    },
+    "semantic": {
+      "description": "Semantic memory: topic-organized knowledge",
+      "directory": "semantic/",
+      "file_pattern": "{topic}.json",
+      "schema": {
+        "topic": "string",
+        "related_dates": ["YYYY-MM-DD"],
+        "key_points": ["string"],
+        "conclusions": ["string"]
+      }
+    }
+  },
+  "index_files": {
+    "master_index": "index/master_index.json",
+    "keyword_index": "index/keyword_index.json",
+    "temporal_index": "index/temporal_index.json"
+  },
+  "auto_extract": {
+    "enabled": false,
+    "triggers": [
+      "session_end",
+      "task_completed",
+      "user_request",
+      "important_info_detected"
+    ]
+  }
+}

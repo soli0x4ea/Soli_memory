@@ -1,0 +1,15 @@
+{
+  "topic": "filesystem_database_design",
+  "related_dates": ["2026-05-17"],
+  "key_points": [
+    {
+      "date": "2026-05-17",
+      "point": "Filesystem as database is suitable for AI agents",
+      "details": "No context limits, fast access, parallel friendly, flexible schema",
+      "source": "episodes/2026-05-17.json"
+    }
+  ],
+  "conclusions": [
+    "Start with filesystem approach, iterate based on real usage"
+  ]
+}
