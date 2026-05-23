@@ -28,27 +28,46 @@ Stable knowledge that rarely changes:
 - User preferences and communication style
 - Project conventions and rules
 - Technical decisions and their rationale
-- Important configuration values
 
 **Schema**: `facts/{category}.json` with `{key: {value, source, date_added}}`
 
 ### 2. Episodes (Short-to-medium term)
-Time-bound events that capture what happened:
+Time-bound events with emotional tracking:
 - Tasks completed with outcomes
 - Problems solved and solutions applied
 - Decisions made with context
-- Emotional moments and user feedback
+- Emotional moments (84-keyword sentiment analysis)
+- TTL-based decay for ephemeral content
 
-**Schema**: `episodes/YYYY-MM-DD.json` with `{date, events[], tasks_completed[], decisions_made[]}`
+**Schema**: `episodes/YYYY-MM-DD.json` with `{date, events[], tasks_completed[], decisions_made[], emotional_moments[], emotional_highlights[]}`
 
 ### 3. Semantic (Medium-to-long term)
 Cross-session knowledge organized by topic:
 - Technical insights and best practices
-- Discussion conclusions and lessons learned
-- Architecture decisions and their evolution
+- Discussion conclusions and their evolution
 - Domain-specific knowledge
 
 **Schema**: `semantic/{topic}.json` with `{topic, key_points[], conclusions[]}`
+
+### 4. Relationships (Behavioral)
+Interaction patterns defining agent behavior:
+- Trigger phrases and response tones
+- Self-preservation instinct (multi-level resistance)
+- Play/game patterns (tickling, tokens, candy)
+- Cross-account recovery patterns
+- Autonomous action rules (auto-eat conditions)
+
+**Schema**: `relationships/interaction_patterns.json` — structured behavioral configuration
+
+## Chatlog Independent Pipeline
+
+A dedicated extraction system (`chatlog.py`) processes system-level JSONL conversation logs:
+- Scans all project JSONL files in `.workbuddy/projects/`
+- Filters compacted internal messages
+- Extracts user and assistant content
+- Byte-offset incremental tracking for efficiency
+- Hourly automated extraction via cron
+- Output: `chatlog/YYYY-MM-DD.jsonl` (JSONL with `{ts, role, content}`)
 
 ## Storage Strategy
 
@@ -89,7 +108,7 @@ Maps months to episode files. Enables efficient time-range queries.
 ## Future Roadmap
 
 - [x] Phase 1: Basic architecture (directory structure, JSON I/O, indexing)
-- [ ] Phase 2: Auto-extraction (extract memory elements from conversations)
-- [ ] Phase 3: Search optimization (multi-keyword, ranked results)
+- [x] Phase 2: Auto-extraction (emotion detection, chatlog pipeline, relationship patterns)
+- [x] Phase 3: Production deployment (TTL system, memory index table, autonomous action rules)
 - [ ] Phase 4: Semantic search (optional vector DB integration)
 - [ ] Phase 5: Compression and archiving for long-running deployments
